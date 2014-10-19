@@ -101,20 +101,21 @@ def draw(canvas):
                          [WIDTH - PAD_WIDTH, paddle2_pos + PAD_HEIGHT]], 1,
                         'black', 'white')
     # draw scores
-    canvas.draw_text(score1, [((WIDTH/2) * 0.8), HEIGHT * 0.2], 28, 'white')
-    canvas.draw_text(score2, [((WIDTH/2) * 1.13), HEIGHT * 0.2], 28, 'white')
+    canvas.draw_text(str(score1), [((WIDTH/2) * 0.8), HEIGHT * 0.2], 48, 'white')
+    canvas.draw_text(str(score2), [((WIDTH/2) * 1.13), HEIGHT * 0.2], 48, 'white')
+
 
 def keydown(key):
     global paddle1_vel, paddle2_vel
     if key == simplegui.KEY_MAP['w']:
-        paddle1_vel = -2
+        paddle1_vel = -3
     if key == simplegui.KEY_MAP['s']:
-        paddle1_vel = 2
+        paddle1_vel = 3
 
     if key == simplegui.KEY_MAP['up']:
-        paddle2_vel = -2
+        paddle2_vel = -3
     if key == simplegui.KEY_MAP['down']:
-        paddle2_vel = 2
+        paddle2_vel = 3
 
 
 def keyup(key):
