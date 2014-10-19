@@ -58,10 +58,16 @@ def draw(canvas):
         ball_vel[1] *= -1
     #Detect collision at the right gutter
     if ball_pos[0] > WIDTH - PAD_WIDTH - BALL_RADIUS:
-        spawn_ball(LEFT)
+        if (ball_pos[1] < paddle2_pos) or (ball_pos[1] > paddle2_pos + PAD_HEIGHT):
+            spawn_ball(LEFT)
+        else:
+            ball_vel[0] *= -1
     #Detect collision at the left gutter
     if ball_pos[0] < PAD_WIDTH + BALL_RADIUS:
-        spawn_ball(RIGHT)
+        if (ball_pos[1] < paddle1_pos) or (ball_pos[1] > paddle1_pos + PAD_HEIGHT):
+            spawn_ball(RIGHT)
+        else:
+            ball_vel[0] *= -1
     ball_pos[0] += ball_vel[0]
     ball_pos[1] += ball_vel[1]
     # draw ball
