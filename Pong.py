@@ -67,6 +67,14 @@ def draw(canvas):
     # draw ball
     canvas.draw_circle(ball_pos, BALL_RADIUS, 1, 'black', 'white')
     # update paddle's vertical position, keep paddle on the screen
+    if (paddle1_pos < 0):
+        paddle1_pos = 0
+    if paddle1_pos > HEIGHT - PAD_HEIGHT:
+        paddle1_pos = HEIGHT - PAD_HEIGHT
+    if (paddle2_pos < 0):
+        paddle2_pos = 0
+    if paddle2_pos > HEIGHT - PAD_HEIGHT:
+        paddle2_pos = HEIGHT - PAD_HEIGHT
     paddle1_pos += paddle1_vel
     paddle2_pos += paddle2_vel
     #Draw the left paddle (paddle1)
@@ -77,6 +85,7 @@ def draw(canvas):
                          [WIDTH - PAD_WIDTH, paddle2_pos + PAD_HEIGHT]], 1,
                         'black', 'white')
     # draw scores
+
 
 def keydown(key):
     global paddle1_vel, paddle2_vel
@@ -89,6 +98,7 @@ def keydown(key):
         paddle2_vel = -1
     if key == simplegui.KEY_MAP['down']:
         paddle2_vel = 1
+
 
 def keyup(key):
     global paddle1_vel, paddle2_vel
@@ -106,7 +116,6 @@ frame = simplegui.create_frame("Pong", WIDTH, HEIGHT)
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(keydown)
 frame.set_keyup_handler(keyup)
-
 
 # start frame
 new_game()
