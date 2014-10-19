@@ -17,9 +17,10 @@ LEFT = False
 RIGHT = True
 ball_pos = [0, 0]
 ball_vel = [0, 0]
-paddle1_pos = 20
-paddle2_pos = 50
-
+paddle1_pos = 0
+paddle2_pos = 0
+paddle1_vel = 0
+paddle2_vel = 0
 # initialize ball_pos and ball_vel for new bal in middle of table
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
 def spawn_ball(direction):
@@ -66,7 +67,8 @@ def draw(canvas):
     # draw ball
     canvas.draw_circle(ball_pos, BALL_RADIUS, 1, 'black', 'white')
     # update paddle's vertical position, keep paddle on the screen
-
+    paddle1_pos += paddle1_vel
+    paddle2_pos += paddle2_vel
     #Draw the left paddle (paddle1)
     canvas.draw_polygon([[0, paddle1_pos], [PAD_WIDTH, paddle1_pos], [PAD_WIDTH, paddle1_pos + PAD_HEIGHT],
                          [0, paddle1_pos + PAD_HEIGHT]], 1, 'black', 'white')
@@ -78,10 +80,26 @@ def draw(canvas):
 
 def keydown(key):
     global paddle1_vel, paddle2_vel
+    if key == simplegui.KEY_MAP['w']:
+        paddle1_vel = -1
+    if key == simplegui.KEY_MAP['s']:
+        paddle1_vel = 1
+
+    if key == simplegui.KEY_MAP['up']:
+        paddle2_vel = -1
+    if key == simplegui.KEY_MAP['down']:
+        paddle2_vel = 1
 
 def keyup(key):
     global paddle1_vel, paddle2_vel
-
+    if key == simplegui.KEY_MAP['w']:
+        paddle1_vel = 0
+    if key == simplegui.KEY_MAP['s']:
+        paddle1_vel = 0
+    if key == simplegui.KEY_MAP['up']:
+        paddle2_vel = 0
+    if key == simplegui.KEY_MAP['down']:
+        paddle2_vel = 0
 
 # create frame
 frame = simplegui.create_frame("Pong", WIDTH, HEIGHT)
